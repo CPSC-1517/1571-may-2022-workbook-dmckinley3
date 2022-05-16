@@ -27,7 +27,7 @@ namespace OOPsReview.Data
         private string _Title;
         private double _Years;
         public int PublicDataField;
-     
+
 
         //property
         //these are access techniques to retrieve or set data in 
@@ -111,7 +111,7 @@ namespace OOPsReview.Data
             get { return _Years; }
             set
             {
-                if(value < 0)
+                if (value < 0)
                 {
                     throw new ArgumentOutOfRangeException($"Years value{value} is invalid. Must be 0 or greater");
                 }
@@ -136,7 +136,7 @@ namespace OOPsReview.Data
         //Default: this constructor does NOT take in any parameters.
         //          this constructor mimics the default system constructor
         //Greedy: this constuctor has a list of parameters, one for each property,
-                    //declare for incoming data
+        //declare for incoming data
 
         // (), (a),(b),(c),(d),(a,b,),(a,c),(a,d)... 2 raised power 4 = 16 constructors
         // (), (a,b,c,d) (default/greedy constructors)
@@ -160,6 +160,8 @@ namespace OOPsReview.Data
             Level = SupervisoryLevel.TeamMember;
             Title = "Unknown";
         }
+
+        //Greedy Constructor
         public Employment(string title, SupervisoryLevel level, double years = 0.0)
         {
             //constructor body
@@ -169,7 +171,7 @@ namespace OOPsReview.Data
             // d) validation for properties with a private set MUST be done here
             //  if not done in the property
 
-            //defualt parameters
+            //default parameters
 
             //WHY? it allows the programmer to use your constructor/methos without having to 
             //  specify all arguments in the code to your constructor/method
@@ -190,10 +192,42 @@ namespace OOPsReview.Data
             // (string requiredparam, int requiredparam, int default1 = 0, intdefault2 = 0, int default3 = 1)
             //
             //call: ...("required string", 25, 10, , 5) default 2 was skipped
+
+
             Title = title;
             Level = level;
             Years = years; //eventually the data will be placed in _Years
+            
+        }
+        //Behaviours (a.k.a. methods)
+        //a behaviour is any method in your class
+        //behavious can be private (for use by the class only); public(for use by the outside user)
+        //all rules about methods are in effect 
 
+        //a special method may be placed in your class to reflect the data stored by the
+        //instance (object) based on this class definition
+        //this method is part of the system software and can be overwritten by
+        //your own version of the method
+
+        public override string ToString()
+
+        {
+            //this string is known as a "comma seperated values (csv)" string
+            //this string uses the get; of the property
+            return $"{Title}, {Level}, {Years}";
+        }
+
+        public void SetEmployeeResponsibilityLevel(SupervisoryLevel level)
+        {
+            //this method, in this example would not be necessary as the access directly
+            // the Level (property) is public( set;)
+            //HOWEVER: IF the Level property had a private set, the outside user would NOT
+            //  have direct access to changing the property.
+            //ThereforeL a method (besides the constructor) would need to be supplied to allow the outside user
+            //the ability to alter the property value (if they so desired)
+
+            //this assignment uses the set; of the property
+            Level = level;
         }
     }
 }
