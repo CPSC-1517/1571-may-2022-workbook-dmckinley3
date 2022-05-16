@@ -27,7 +27,7 @@ namespace OOPsReview.Data
         private string _Title;
         private double _Years;
         public int PublicDataField;
-        //testing
+     
 
         //property
         //these are access techniques to retrieve or set data in 
@@ -160,6 +160,40 @@ namespace OOPsReview.Data
             Level = SupervisoryLevel.TeamMember;
             Title = "Unknown";
         }
+        public Employment(string title, SupervisoryLevel level, double years = 0.0)
+        {
+            //constructor body
+            // a) a parameter for each property
+            // b) you COULD code your validation in this constructor
+            // c) validation for public reaonly data members MUST be dont here
+            // d) validation for properties with a private set MUST be done here
+            //  if not done in the property
 
+            //defualt parameters
+
+            //WHY? it allows the programmer to use your constructor/methos without having to 
+            //  specify all arguments in the code to your constructor/method
+            //Location: end of parameter list
+            //How Many: as many as you wish
+            //values for your default parameters MUST be a valid value
+            //position and order of specified default parameters are important
+            // when the program uses the constructor/method.
+            //default parameters CAN be skipped, HOWEVER you still must account for the 
+            // skipped parameter in your argument call list using commas
+            //by giving the default parameter an argument value on the call, the constructor/methos
+            //default value is overridden
+
+            //syntax: datatype parameter name = default value
+            //example:years on this constructor is a default parameter
+
+            //example: skipped defaults(3 default parameters, second one skipped)
+            // (string requiredparam, int requiredparam, int default1 = 0, intdefault2 = 0, int default3 = 1)
+            //
+            //call: ...("required string", 25, 10, , 5) default 2 was skipped
+            Title = title;
+            Level = level;
+            Years = years; //eventually the data will be placed in _Years
+
+        }
     }
 }
