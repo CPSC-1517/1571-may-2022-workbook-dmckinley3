@@ -111,7 +111,7 @@ namespace OOPsReview.Data
             get { return _Years; }
             set
             {
-                if (value < 0)
+                if (!Utilities.IsZeroPositive(value))
                 {
                     throw new ArgumentOutOfRangeException($"Years value{value} is invalid. Must be 0 or greater");
                 }
