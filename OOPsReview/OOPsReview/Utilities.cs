@@ -14,9 +14,11 @@ namespace OOPsReview
         //static classes are shared between all outside users at the SAME time
         //DO NOT consider saving data within a static class BECAUSE you cannot be
         //  certain it will be there when you use the class again
+        //consider placing GENERIC re-usable methods within a static class
+
 
         //sample of overloading methods
-
+        //the method signatures are different
         public static bool IsZeroPositive(double value)
         {
             bool valid = true;
