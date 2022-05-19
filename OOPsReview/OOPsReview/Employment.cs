@@ -214,7 +214,7 @@ namespace OOPsReview.Data
         {
             //this string is known as a "comma seperated values (csv)" string
             //this string uses the get; of the property
-            return $"{Title}, {Level}, {Years}";
+            return $"{Title},{Level},{Years}";
         }
 
         public void SetEmployeeResponsibilityLevel(SupervisoryLevel level)

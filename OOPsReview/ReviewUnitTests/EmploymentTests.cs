@@ -10,6 +10,7 @@ namespace ReviewUnitTests
         public void CreatingEmployment_GoodDefault_EmploymentMade()
         {
             
+
             //Arrange
             string expectedTitle = "Unknown";
             SupervisoryLevel expectedLevel = SupervisoryLevel.TeamMember;
@@ -19,7 +20,7 @@ namespace ReviewUnitTests
             //Assess
             Assert.AreEqual(expectedTitle, employment.Title, "Default employment title values not as expected:" +
                 $"{expectedTitle} vs {employment.Level}");
-            Assert.AreEqual(expectedTitle, employment.Title, "Default employment level values not as expected:" +
+            Assert.AreEqual(expectedLevel, employment.Level, "Default employment level values not as expected:" +
                 $"{expectedLevel} vs {employment.Level}");
             Assert.AreEqual(expectedYears, employment.Years, "Default employment Years values not as expected:" +
                 $"{expectedYears} vs {employment.Years}");
@@ -40,8 +41,8 @@ namespace ReviewUnitTests
             Employment employment = new Employment(title, level, years);
             //Assess
             Assert.AreEqual(expectedTitle, employment.Title, "Greedy employment title values not as expected:" +
-                $"{expectedTitle} vs {employment.Level}");
-            Assert.AreEqual(expectedTitle, employment.Title, "Greedy employment level values not as expected:" +
+                $"{expectedTitle} vs {employment.Title}");
+            Assert.AreEqual(expectedLevel, employment.Level, "Greedy employment level values not as expected:" +
                 $"{expectedLevel} vs {employment.Level}");
             Assert.AreEqual(expectedYears, employment.Years, "Greedy employment Years values not as expected:" +
                 $"{expectedYears} vs {employment.Years}");
@@ -86,20 +87,25 @@ namespace ReviewUnitTests
         }
         [TestMethod]
         [DataRow("Unit Test Designer",SupervisoryLevel.Owner,25.2)]
-        public void Employnebt_ToStringDisplay_GoodDisplay(string title, SupervisoryLevel level, double years)
+        public void Employment_ToStringDisplay_GoodDisplay(string title, SupervisoryLevel level, double years)
         {
             try
             {
+                //Arrange
                 Employment employment = new Employment(title, level, years);
-
-                Assert.AreEqual(employment.ToString(), "Unit Test Designer, Owner, 25.2", $"ToString {employment.ToString()} not as expected.");
+                //Act
+                string displayofToString = employment.ToString();
+                //Assess
+                Assert.AreEqual(employment.ToString(), "Unit Test Designer,Owner,25.2", $"ToString {employment.ToString()} not as expected.");
 
 
             }
             catch (Exception ex)
             {
+                
                 Assert.Fail($"Unexpected exception of type {ex.GetType()} caught {ex.Message}");
             }
         }
+
     }
 }
