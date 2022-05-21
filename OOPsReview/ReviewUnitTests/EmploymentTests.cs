@@ -107,5 +107,20 @@ namespace ReviewUnitTests
             }
         }
 
+        [TestMethod]
+      [DataRow(SupervisoryLevel.Owner)]
+        public void Employment_SetSupervisoryLevel_GoodSet(SupervisoryLevel level)
+        {
+
+            //arrange (setup of data)
+            Employment employment = new Employment("Boss", SupervisoryLevel.Entry, 3.5);
+            //act (call the method for testing
+            employment.SetEmployeeResponsibilityLevel(level);
+
+            //assess (check for success)
+            Assert.IsTrue(employment.Level == SupervisoryLevel.Owner, $"Employment level of {employment.Level} is incorrect, should be owner.");
+
+          
+        }
     }
 }
