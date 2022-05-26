@@ -8,7 +8,7 @@ namespace OOPsReview.Data
 {
     //struct is a value variable
     //classe is a reference variable
-    internal struct ResidentAddress
+    public struct ResidentAddress
     {
         //data members
         public int Number;

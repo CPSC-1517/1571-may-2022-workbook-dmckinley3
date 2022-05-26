@@ -46,9 +46,35 @@ namespace OOPsReview.Data
                 {
                     throw new ArgumentNullException("Last name is required");
                 }
-                //else {_FirstName = value;}
+
                 _LastName = value;
             }
+        }
+
+        //composition actually uses the other struct/class as a property/field within 
+        //  the definition of the class being specified (created)
+        //in this example Address is a field (data member)
+
+        //this field is NOT a property
+        //The data type is a developer defined datatype (struct)
+
+        public ResidentAddress Address;
+        public List<Employment> EmploymentPositions { get; private set; }
+
+        public Person()
+        {
+            //the system will automatically assign default system values to
+            // our datamembers according to their datatype
+            //string -> null
+            //objects -> null
+            // firstname and lastname has validation voiding a null value
+            FirstName = "Unknown";
+            LastName = "Unknown";
+            //if one tried to reference an instance's data and the instance is
+            //null THEN one would get an exception: null exception
+            //even though you have no instances to store, you will at least have
+            //  some place to put the data ONCE it is supplied
+            EmploymentPositions = new List<Employment>();
         }
 
     }
