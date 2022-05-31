@@ -17,7 +17,7 @@ Console.WriteLine(myEmp.ToString()); //use the instance name to reference items 
 Console.WriteLine($"{myEmp.Title},{myEmp.Level},{myEmp.Years}");
 
 
-myEmp.SetEmploymentResponsibilityLevel(SupervisoryLevel.DepartmentHead);
+myEmp.SetEmployeeResponsibilityLevel(SupervisoryLevel.DepartmentHead);
 
 Console.WriteLine(myEmp.ToString());
 
@@ -93,7 +93,27 @@ ResidentAddress CreateAddress()
 
 Person CreatePerson(Employment job, ResidentAddress address)
 {
-    Person me = new Person("Don", "Welch", address, null);
-    me.AddEmployment(job);
+    //Person me = new Person("Don", "Welch", address, null);
+
+    //once could add the job(s) to the instance of Person(me) after
+    //the instance is created via the behavour AddEmployement(Employment emp)
+
+    //me.AddEmployment(job);
+
+    //OR
+
+    //one could create a List<T> and add to the List<T> before creating
+    //the Person instance
+    List<Employment> employments = new List<Employment>(); //create the List<T> instance
+    employments.Add(job); //add a element to the List<T>
+    Person me = new Person("Don", "Welch", address, employments); //using the greedy constructor
+
+    //create additional jobs and load to Person
+    Employment employment = new Employment("New Hire", SupervisoryLevel.Entry,0.5);
+    me.AddEmployment(employment);
+    Employment employment = new Employment("Team Head", SupervisoryLevel.TeamLeader, 5.2);
+    me.AddEmployment(employment);
+    Employment employment = new Employment("Department IT head", SupervisoryLevel.DepartmentHead, 6.8);
+    me.AddEmployment(employment);
     return me;
 }
