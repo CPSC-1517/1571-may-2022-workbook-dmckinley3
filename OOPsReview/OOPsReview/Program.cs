@@ -47,6 +47,19 @@ me = CreatePerson(Job, Address);
 //Access (check your results)
 Console.WriteLine($"{me.FirstName} {me.LastName} lives at {me.Address.ToString()}" +
     $" having a job count of {me.NumberOfPositions}");
+Console.WriteLine("/nJobs:/n");
+foreach(var item in me.EmploymentPositions)
+{
+    Console.WriteLine("output via foreach loop");
+    Console.WriteLine(item.ToString()); 
+}
+
+
+for(int i = 0; i < me.EmploymentPositions.Count; i++)
+{
+    Console.WriteLine(me.EmploymentPositions[i].ToString());
+}
+
 
 void CreateJob(ref Employment job)
 {
@@ -109,11 +122,12 @@ Person CreatePerson(Employment job, ResidentAddress address)
     Person me = new Person("Don", "Welch", address, employments); //using the greedy constructor
 
     //create additional jobs and load to Person
-    Employment employment = new Employment("New Hire", SupervisoryLevel.Entry,0.5);
+    Employment employment = new Employment("New Hire", SupervisoryLevel.Entry, 0.5);        
     me.AddEmployment(employment);
-    Employment employment = new Employment("Team Head", SupervisoryLevel.TeamLeader, 5.2);
+
+    employment = new Employment("Team Head", SupervisoryLevel.TeamLeader, 5.2);
     me.AddEmployment(employment);
-    Employment employment = new Employment("Department IT head", SupervisoryLevel.DepartmentHead, 6.8);
+    employment = new Employment("Department IT head", SupervisoryLevel.DepartmentHead, 6.8);
     me.AddEmployment(employment);
     return me;
 }
