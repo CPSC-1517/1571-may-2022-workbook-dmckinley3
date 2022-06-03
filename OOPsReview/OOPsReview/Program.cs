@@ -70,6 +70,17 @@ Employment theParsedRecord = Employment.Parse(theRecord);
 Console.WriteLine(theParsedRecord.ToString());
 
 
+//using employment .TryParse
+theParsedRecord = null;
+if(Employment.TryParse(theRecord, out theParsedRecord))
+{
+    //do whatever logic you need to do with the valid data
+    Console.WriteLine(theParsedRecord.ToString());
+}
+//if the TryParse failed, you would be handling it via your user friendly error handling
+//code
+
+
 void CreateJob(ref Employment job)
 {
     //since the class MAY throw exceptions, you should have user friendly error handling
