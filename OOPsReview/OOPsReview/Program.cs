@@ -81,6 +81,18 @@ if(Employment.TryParse(theRecord, out theParsedRecord))
 //code
 
 
+//File I/O
+//writing a comma seperated value file
+string pathname = WriteCSVFile();
+
+//read a comma seperated value file
+List<Employment> jobs = ReadCSVFile(pathname);
+
+//writing a JSON file
+
+//Read a JSON file
+
+
 void CreateJob(ref Employment job)
 {
     //since the class MAY throw exceptions, you should have user friendly error handling
@@ -150,4 +162,48 @@ Person CreatePerson(Employment job, ResidentAddress address)
     employment = new Employment("Department IT head", SupervisoryLevel.DepartmentHead, 6.8);
     me.AddEmployment(employment);
     return me;
+
+}
+
+
+string WriteCSVFile()
+{
+    string pathname = "";
+    try
+    {
+        List<Employment> jobs = new List<Employment>();
+        jobs.Add(new Employment("trainee", SupervisoryLevel.Entry, 0.5));
+        jobs.Add(new Employment("worker", SupervisoryLevel.TeamMember, 3.5));
+        jobs.Add(new Employment("lead", SupervisoryLevel.TeamLeader, 7.4));
+        jobs.Add(new Employment("dh new projects", SupervisoryLevel.DepartmentHead, 1.0));
+
+        //create a list of comma seperated value strings
+        // the contents of each string will be three values of Employment
+        List<string> csvlines = new List<string>();
+        //place all the instances of Employment in the collection of jobs
+        //in the csvlines using .ToString() of the Employment class
+        foreach (var job in jobs)
+        {
+            csvlines.Add(job.ToString());
+        }
+
+        //write to a text file the csv lines
+        //each line represents a Employment instance
+        //you could use StreamWriter
+        //HOWEVER within the File class there is a method that ouputs a list of strings
+        //all within ONE command. there is NO NEED for a StreamWriter instance
+        //the pathname is the minimum for the command
+        //the file by default will be created in the same folder as your .exe file
+        //you CAN alter the pathname using relative addressing
+
+        pathname = "Employment.csv";
+        File.WriteAllLines(pathname, csvlines);
+        Console.WriteLine($"\n Check out the csv file at{Path.GetFullPath(pathname)}");
+    }
+
+    catch(Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+    return Path.GetFullPath(pathname);
 }
