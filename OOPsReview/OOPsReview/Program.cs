@@ -331,7 +331,6 @@ void SaveAsJson(Person me, string pathname)
     {
         Console.WriteLine(ex.Message);
     }
-
     Person ReadAsJson(string pathname)
     {
         Person person = null;
@@ -351,4 +350,5 @@ void SaveAsJson(Person me, string pathname)
         }
         return person;
     }
+
 }
