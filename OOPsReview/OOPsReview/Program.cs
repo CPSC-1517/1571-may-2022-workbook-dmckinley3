@@ -83,11 +83,18 @@ if(Employment.TryParse(theRecord, out theParsedRecord))
 
 //File I/O
 //writing a comma seperated value file
-string pathname = WriteCSVFile();
+//string pathname = WriteCSVFile();
 
 //read a comma seperated value file
-List<Employment> jobs = ReadCSVFile(pathname);
-
+//we will be using ReadAllLines(pathname); returns an array of strings; each
+//  array element is one line in your csv file.
+const string PATHNAME = "../../../Employment.csv";
+List<Employment> jobs = ReadCSVFile(PATHNAME);
+Console.WriteLine($"\nResults of reading the csv file at : {PATHNAME}");
+foreach(Employment job in jobs)
+{
+    Console.WriteLine($"Title: {job.Title} Level: {job.Level} Year: {job.Years}");
+}
 //writing a JSON file
 
 //Read a JSON file
@@ -206,4 +213,78 @@ string WriteCSVFile()
         Console.WriteLine(ex.Message);
     }
     return Path.GetFullPath(pathname);
+}
+
+List<Employment> ReadCSVFile(string pathname)
+{
+    List<Employment> employments = new List<Employment>();
+    //use this variable reapeatedly to hold a new instance of Employment
+    //as I read and Parse the CSV file.
+    Employment job = null;
+    //this try/catch error handling is for system errors while reading the 
+    //   file
+    try
+    {
+        //read the CSV file using File.ReadAllLines()
+        //thus NO need to create a StreamReader.
+        //ReadAllLines returns an array of strings, each string representing 
+        //one line in your CSV file.
+        string[] csvFileInput = File.ReadAllLines(pathname);
+
+        //process EACH line in the file
+       foreach(string csvLine in csvFileInput)
+        {
+            //as you process each line, we will use the TryParse of Employment
+            //this will return an instance of Employment IF the data is valid
+            //IF the data is not valid, Employment will throw various errors.
+            //we DO NOT want to stop processing the strings IF an error is 
+            //discovered
+            //THEREFORE we WILL have a try/catch WITHIN this loop
+            try
+            {
+                //attempt to convert a comma seperated value string
+                //into an instance of Employment (parse the data)
+                bool converted = Employment.TryParse(csvLine, out job);
+                //test if the parsing was successful
+                //the way this logic is set up, the testing
+                //is unnecessary.
+                //why? if the parse fails, an error would have been thrown, thus 
+                //processing will have jumped to a catch
+                //why do the test then?
+                //because: consider that on a successful parse you may
+                //(complex)have additional logic to perform.
+                if(converted)
+                {
+                    employments.Add(job);
+                }
+
+            }
+            catch(FormatException ex)
+            {
+                Console.WriteLine($"Format error: {ex.Message}");
+            }
+            catch (ArgumentNullException ex)
+            {
+                Console.WriteLine($"Argument error: {ex.Message}");
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                Console.WriteLine($"Out of range error: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Unknown exception error: {ex.Message}");
+            }
+        }
+        
+    }
+    catch(IOException ex)
+    {
+        Console.WriteLine($"Reading CSV file error {ex.Message}");
+    }
+    catch(Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+    return employments;
 }
