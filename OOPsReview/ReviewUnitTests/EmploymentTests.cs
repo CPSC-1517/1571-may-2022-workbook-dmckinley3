@@ -113,7 +113,7 @@ namespace ReviewUnitTests
         {
 
             //arrange (setup of data)
-            Employment employment = new Employment("Boss", SupervisoryLevel.Entry, 3.5);
+            Employment employment = new Employment("Boss", SupervisoryLevel.DepartmentHead, 3.5);
             //act (call the method for testing
             employment.SetEmployeeResponsibilityLevel(level);
 
