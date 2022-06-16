@@ -12,9 +12,20 @@ namespace WebApp.Pages
             _logger = logger;
         }
 
+        public string MyName { get; set; }
+
         public void OnGet()
         {
-
+            Random rnd = new Random();
+            int value = rnd.Next(0,100); // 100 is not included
+            if(value % 2 == 0)
+            {
+                MyName = $"Don ({value}) welcome to the wide wild world of Razor Pages";
+            }
+            else
+            {
+                MyName = null;
+            }
         }
     }
 }
