@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
     @*Removed the link to bootstrap
-        add a link to Holiday.css https://holidaycss.js.org
+    add a link to Holiday.css https://holidaycss.js.org
     *@
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/holiday.css@0.9.8"
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/holiday.css@0.9.8" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApp.styles.css" asp-append-version="true" />
 </head>
@@ -24,6 +24,9 @@
                 <li>
                     <a asp-area="" asp-page="/Privacy">Privacy</a>
                 </li>
+                <li>
+                    <a asp-area="" asp-page="/Samples/controls">Controls</a>
+                </li>
             </ul>
         </nav>
     </header>
@@ -34,7 +37,7 @@
     </div>
 
     <footer>
-            &copy; 2022 - WebApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        &copy; 2022 - WebApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
     </footer>
 
 
