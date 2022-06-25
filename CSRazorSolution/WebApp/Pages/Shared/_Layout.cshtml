@@ -13,20 +13,29 @@
 </head>
 <body>
     <header>
+        @*Holiday.css menu*@
         <nav>
             <ul>
+                <li> <a asp-area="" asp-page="/Index"><img src="~/img/WestWindLogo.png" alt="westwindlogo" title="Go To Home" /></a></li>
                 <li>
                     <a asp-area="" asp-page="/Index">Home</a>
                 </li>
+                @*Submenu*@
                 <li>
-                    <a asp-area="" asp-page="/Samples/BasicDataManagement">Basics</a>
+                    <span>Samples</span>
+                    <ul>
+                        <li>
+                            <a asp-area="" asp-page="/Samples/BasicDataManagement">Basics</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-page="/Samples/controls">Controls</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <a asp-area="" asp-page="/Privacy">Privacy</a>
                 </li>
-                <li>
-                    <a asp-area="" asp-page="/Samples/controls">Controls</a>
-                </li>
+
             </ul>
         </nav>
     </header>
