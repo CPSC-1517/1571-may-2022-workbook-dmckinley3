@@ -8,6 +8,10 @@ namespace WestWindSystem.Entities
 {
     public class BuildVersion
     {
+
+        //in sql nvarchar(), varchar, nchar, char is declared as a 
+        //string in your entitiy definition!!!
+        //sql bit is a bool in C#
         public int Id { get; set; }
         public int Major { get; set; }  
         public int Minor { get; set; }
