@@ -20,6 +20,7 @@ namespace WestWindSystem.Entities
 
         //in sql nvarchar(), varchar, nchar, char is declared as a 
         //string in your entitiy definition!!!
+        //float is a double in c#
         //sql bit is a bool in C#
         //0 is false, 1 is true
 
