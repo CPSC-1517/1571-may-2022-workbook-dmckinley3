@@ -14,7 +14,7 @@ namespace WestWindSystem.DAL
 {
     //leave the access type for this class as internal
     //"internal" access to this class is only possible
-    //from within this project
+    //from within this project 
     //why? it adds a layer of security to the web application
 
     //DbContext is the entity framework software that talks
