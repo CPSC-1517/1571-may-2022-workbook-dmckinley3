@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 #region Additional Namespaces
 using Microsoft.EntityFrameworkCore;
 using WestWindSystem.Entities;
-
 #endregion
 
 namespace WestWindSystem.DAL
