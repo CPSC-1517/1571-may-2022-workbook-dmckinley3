@@ -31,7 +31,7 @@ namespace WestWindSystem
             //each service class will have an AddTransient<T>() method
 
 
-            //use the AddTransient<T> method where T is your BLL class name
+            //use the AddTransient<T> method where T is  your BLL class name
             //AddTransient is called a factory
             //I read my lamda symbol => as "do the following..."
             services.AddTransient<BuildVersionServices>((serviceProvider) =>
