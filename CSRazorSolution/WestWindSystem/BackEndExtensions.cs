@@ -42,6 +42,15 @@ namespace WestWindSystem
                 //supplying the context reference to the service class
                 return new BuildVersionServices(context);
             });
+
+            services.AddTransient<TerritoryServices>((serviceProvider) =>
+            {   //get the connection class that was registered above in AddDbContext 
+                var context = serviceProvider.GetService<WestWindContext>();
+
+                //create an instance of the service class (BuildVersionServices)
+                //supplying the context reference to the service class
+                return new TerritoryServices(context);
+            });
         }
     }
 }
