@@ -10,13 +10,13 @@ using WebApp.Helpers;
 
 namespace WebApp.Pages.Samples
 {
-    public class PartialFilterSearchModel : PageModel
+    public class PartialFilterSearchPageModel : PageModel
     {
         #region Private service fields & class constructor
         private readonly TerritoryServices _territoryServices;
         private readonly RegionServices _regionServices;
 
-        public PartialFilterSearchModel(TerritoryServices territoryservices,
+        public PartialFilterSearchPageModel(TerritoryServices territoryservices,
                                         RegionServices regionservices)
         {
             _territoryServices = territoryservices;
@@ -24,15 +24,9 @@ namespace WebApp.Pages.Samples
         }
         #endregion
 
-        [TempData]
         public string Feedback { get; set; }
 
-        //this is bond to the input control via asp-for
-        //this is a two way binding out and in
-        //data is move out and in FOR YOU AUTOMATICALLY
-        //SupportsGet = true will allow this property to be matched to
-        //  a routing parameter of the same name.
-        [BindProperty(SupportsGet = true)]
+        [BindProperty]
         public string searcharg { get; set; }
 
         public List<Territory> TerritoryInfo { get; set; }
@@ -49,19 +43,22 @@ namespace WebApp.Pages.Samples
         private const int PAGE_SIZE = 5;
         //be able to hold an instance of the Paginator
         public Paginator Pager { get; set; }
+
         #endregion
 
         public void OnGet(int? currentPage)
         {
-            //using the Paginator with your query
-
-            //OnGet will have a parameter (Request query string) that receives the
-            //  current page number. On the initial load of the page, this value
-            //  will be null.
-
-            //obtain the data list for the Region dropdownlist (select tag)
             PopulateLists();
 
+            //the paginator will call this OnGet() method
+            //the requested page enters the method via currentPage
+
+            PopulateTable(currentPage);
+
+        }
+
+        public void PopulateTable(int? currentPage)
+        {
             if (!string.IsNullOrWhiteSpace(searcharg))
             {
                 //setting up for using the Paginator only needs to be done if
@@ -86,9 +83,6 @@ namespace WebApp.Pages.Samples
                 Pager = new Paginator(totalcount, current);
             }
         }
-
-
-
         public void PopulateLists()
         {
             RegionList = _regionServices.Region_List();
@@ -100,17 +94,15 @@ namespace WebApp.Pages.Samples
             {
                 Feedback = "Required: Search argument is empty.";
             }
-            //the receiving "searcharg" is the routing parameter
-            //the sending "searcharg" is a BindProperty field
-            //the RedirectToPage causes a Get requested to be placed
-            //  on the stack for processing when control is reeturned
-            //  to the browser
-            //Since the processing of this request causes a second
-            //  trip to the server for processing, data needs to be retained
-            //  between the two trips; hence the use of the routing  parameter
-            //This is different then Page() which DOES NOT cause a Get request
-            //  to be placed on the stack.
-            return RedirectToPage(new { searcharg = searcharg });
+            else
+            {
+                //this needs to be commented out ONCE you have installed paging in the
+                //      RedirecToPage version of this example.
+
+                //TerritoryInfo = _territoryServices.GetByPartialDescription(searcharg);
+                PopulateTable(1);
+            }
+            return Page();
         }
 
         public IActionResult OnPostClear()
@@ -118,7 +110,7 @@ namespace WebApp.Pages.Samples
             Feedback = "";
             searcharg = null;
             ModelState.Clear();
-            return RedirectToPage(new { searcharg = (string?)null });
+            return Page();
         }
 
         public IActionResult OnPostNew()

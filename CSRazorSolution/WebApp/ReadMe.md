@@ -1,10 +1,10 @@
 # 1517 May 2022 workbook
 
-## David McKinley
+## Don Welch (Instructor)
 
-## dmckinley3
+## dwelchnait
 
-This is a public repository for your classroom demos on Razor Pages
+This is a public repository for my classroom demos on Razor Pages
 
 ## Known Bugs
 
