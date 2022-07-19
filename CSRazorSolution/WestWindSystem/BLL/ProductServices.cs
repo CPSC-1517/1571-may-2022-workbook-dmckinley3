@@ -22,5 +22,23 @@ namespace WestWindSystem.BLL
         }
 
         #endregion
+
+        public List<Category> Category_List()
+        {
+            //_context: using the context instance
+            // Categories: using the DbSet property
+            // .Orderby(x => x.entitypropertyname
+            //.ToList(): convert IEnumerable<T> to the desired list<T>
+            return _context.Categories.OrderBy(x => x.CategoryName).ToList();
+        }
+
+
+        public List<Product> Product_GetByID(int categoryid)
+        {
+
+            return _context.Products
+                            .Where(x => x.CategoryID == categoryid).ToList();
+
+        }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-#region Additional Namespaces
+﻿#region Additional Namespaces
 using WestWindSystem.DAL;
 using WestWindSystem.Entities;
 #endregion
@@ -22,5 +17,21 @@ namespace WestWindSystem.BLL
         }
 
         #endregion
+
+
+
+        public List<Category> Category_List()
+        {
+            //_context: using the context instance
+            // Categories: using the DbSet property
+            // .Orderby(x => x.entitypropertyname
+            //.ToList(): convert IEnumerable<T> to the desired list<T>
+            return _context.Categories.OrderBy(x=> x.CategoryName).ToList();
+        }
+
+ 
+
+
+
     }
 }
