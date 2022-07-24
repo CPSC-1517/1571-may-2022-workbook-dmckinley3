@@ -1,0 +1,90 @@
+﻿@page "{categoryid?}"
+@model WebApp.Pages.Samples.CategoryProductsModel
+@{
+    ViewData["Title"] = "Category Products CRUD";
+}
+<h1>CRUD Category Products</h1>
+
+<p>@Model.Feedback</p>
+
+<form method="post">
+    <label> 
+        @*on a select tag
+            option value is the data being returned for your selection
+            the value between the opening tag and closing tag is being display on the 
+                 web page
+        *@
+        Select a category:
+        <select asp-for="categoryid">
+            <option value="0">select ....</option>
+            @foreach(var cat in Model.CategoryList)
+            {
+                <option value="@cat.CategoryID"
+                    selected=@(cat.CategoryID == Model.categoryid)>
+                @cat.CategoryName
+                </option>
+            }
+        </select>
+    </label>
+    <br/><br/>
+    <button type="submit" asp-page-handler="Search">Search</button>&nbsp;&nbsp;    
+    <button type="submit" asp-page-handler="Clear">Clear</button>&nbsp;&nbsp; 
+    <button type="submit" asp-page-handler="New">New Product</button> 
+    <br/><br/>
+    @if (Model.ProductList != null)
+    {
+        if (Model.ProductList.Count() == 0)
+        {
+            <p>There are no products on file for the selected category.</p>
+        }
+        else
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Supplier</th>
+                        <th>Unit Size</th>
+                        <th>Disc</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model.ProductList )
+                    {
+                        @*
+                            to format currency on a display field
+                            use the string.Format("{0:#,##0.00}",variablename)
+                        *@
+                        <tr>
+                            <td>
+                                <a href="/Samples/CRUDProduct/@item.ProductID">
+                                    @item.ProductName</a>
+                            </td>
+                            <td>
+                                <select disabled="true">
+                                    @foreach(var sup in Model.SupplierList)
+                                    {
+                                        <option value="@sup.SupplierID"
+                                            selected=@(sup.SupplierID == item.SupplierID)>
+                                        @sup.CompanyName
+                                        </option>
+                                    }
+                                </select>
+                            </td>
+                            <td>
+                                @item.QuantityPerUnit
+                            </td>
+                            <td>
+                                <input type="checkbox" checked="@item.Discontinued">
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+
+                </tfoot>
+            </table>
+        }
+    }
+
+</form>

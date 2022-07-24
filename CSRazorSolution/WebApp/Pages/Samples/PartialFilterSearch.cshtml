@@ -125,6 +125,14 @@
                                         //      of the desired page
                                         //for the asp-page your page name reference
                                         //  MUST be based from the folder name Pages
+
+                                        //the syntax for routing to a variable is
+                                        //   asp-route-xxxxx where xxxxx is the variable
+                                        //   destination to which you wish to route 
+
+                                        //currentPage will be sent as a url parameter
+                                        //  which will be obtained on the OnGet()
+
                                             <a title="Page @pageRef.Page"
                                            asp-page="/Samples/PartialFilterSearch"
                                            asp-route-currentpage="@pageRef.Page">
