@@ -12,14 +12,14 @@ using WestWindSystem.Entities;
 
 namespace WestWindSystem.BLL
 {
-    public class CategoryServices
+    public class SupplierServices
     {
         #region setup the context connection variable and class constructor
         //variable to hold an instance of context class
         private readonly WestWindContext _context;
 
         //constructor to create an instance of the registered context class
-        internal CategoryServices(WestWindContext regcontext)
+        internal SupplierServices(WestWindContext regcontext)
         {
             _context = regcontext;
         }
@@ -28,13 +28,13 @@ namespace WestWindSystem.BLL
 
         #region Service: Queries
 
-        public List<Category> Category_List()
+        public List<Supplier> Supplier_List()
         {
             // _content: using the context instance
             // Categories: using the DbSet property
             // .OrderBy(x => x.entitypropertyname
             // .ToList: convert IEnumerable<T> to the desired List<T>
-            return _context.Categories.OrderBy(x => x.CategoryName).ToList();
+            return _context.Suppliers.OrderBy(x => x.CompanyName).ToList();
         }
 
         #endregion
